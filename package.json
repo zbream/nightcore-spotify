@@ -1,0 +1,37 @@
+{
+  "name": "nightcore-spotify",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build:dev -- --watch",
+    "build": "npm run build:prod",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production",
+    "lint": "tslint -p .",
+    "clean": "rimraf dist dist-artifacts",
+    "ci": "run-s clean lint build web-ext:build",
+    "web-ext:build": "web-ext build --source-dir dist --artifacts-dir dist-artifacts",
+    "web-ext:run": "web-ext run --source-dir dist"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "rxjs": "^6.5.3"
+  },
+  "devDependencies": {
+    "@types/chrome": "0.0.88",
+    "@types/firefox-webext-browser": "^67.0.2",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.0.4",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.0",
+    "ts-loader": "^6.0.4",
+    "tslint": "^5.19.0",
+    "typescript": "^3.6.2",
+    "web-ext": "^3.1.1",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8",
+    "zbream-standards": "0.0.0-beta.9"
+  }
+}

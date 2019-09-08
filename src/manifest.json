@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+  "name": "Nightcore for Spotify",
+  "short_name": "Nightcore",
+  "version": "0.0.0",
+  "description": "Add Nightcore mode to Spotify web app.",
+  "developer": {
+    "name": "Zack Ream",
+    "url": "https://github.com/zbream/nightcore-spotify"
+  },
+  "permissions": [],
+  "icons": {
+    "48": "icon.svg",
+    "96": "icon.svg"
+  },
+  "background": {
+    "scripts": ["background/background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://open.spotify.com/*"],
+      "js": ["content-script/content-script.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "page_action": {
+    "default_icon": "icon.svg",
+    "default_title": "Set Nightcore Multiplier",
+    "show_matches": ["https://open.spotify.com/*"]
+  },
+  "web_accessible_resources": [
+    "page-script/page-script.js"
+  ]
+}
