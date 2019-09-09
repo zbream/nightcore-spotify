@@ -33,9 +33,7 @@ export class NcControllerService {
     this._player.playbackRate = this._multiplier;
     this._player.defaultPlaybackRate = this._multiplier;
     // disable pitch shift
-    if ('mozPreservesPitch' in this._player) {
-      this._player.mozPreservesPitch = false;
-    }
+    this._player.mozPreservesPitch = false;
   }
 
 }

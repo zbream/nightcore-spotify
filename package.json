@@ -12,7 +12,8 @@
     "clean": "rimraf dist dist-artifacts",
     "ci": "run-s clean lint build web-ext:build",
     "web-ext:build": "web-ext build --source-dir dist --artifacts-dir dist-artifacts",
-    "web-ext:run": "web-ext run --source-dir dist"
+    "web-ext:run": "web-ext run --source-dir dist",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -22,10 +23,13 @@
   "devDependencies": {
     "@types/chrome": "0.0.88",
     "@types/firefox-webext-browser": "^67.0.2",
+    "@types/jest": "^24.0.18",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.0.4",
+    "jest": "^24.9.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.0",
+    "ts-jest": "^24.0.2",
     "ts-loader": "^6.0.4",
     "tslint": "^5.19.0",
     "typescript": "^3.6.2",
