@@ -12,7 +12,7 @@
     "clean": "rimraf dist dist-artifacts",
     "ci": "run-s clean lint build web-ext:build",
     "web-ext:build": "web-ext build --source-dir dist --artifacts-dir dist-artifacts",
-    "web-ext:run": "web-ext run --source-dir dist",
+    "web-ext:run": "web-ext run --source-dir dist --url https://open.spotify.com --browser-console",
     "test": "jest"
   },
   "author": "",

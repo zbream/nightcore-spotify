@@ -9,12 +9,12 @@ export class NcBackgroundService {
   private _subscriptions = new Subscription();
 
   constructor(
-    private _window: Window,
+    private _browser: typeof browser,
   ) {}
 
   init() {
     this._subscriptions.add(
-      fromWebExtEvent(this._window.browser.pageAction.onClicked).pipe(
+      fromWebExtEvent(this._browser.pageAction.onClicked).pipe(
         map(([tab]) => tab),
       ).subscribe(tab => void this._onPageAction(tab)),
     );
@@ -30,7 +30,7 @@ export class NcBackgroundService {
   }
 
   private _notifyContentScript(tab: browser.tabs.Tab, message: NcMessage) {
-    this._window.browser.tabs.sendMessage(tab.id!, message);
+    this._browser.tabs.sendMessage(tab.id!, message);
   }
 
 }

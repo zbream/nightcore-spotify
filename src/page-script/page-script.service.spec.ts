@@ -67,14 +67,10 @@ describe('NcPageScriptService', () => {
 });
 
 class MockWindow {
-
   addEventListener = jest.fn();
   removeEventListener = jest.fn();
-
 }
 
 class MockControllerService implements Partial<NcControllerService> {
-
   setMultiplier = jest.fn();
-
 }

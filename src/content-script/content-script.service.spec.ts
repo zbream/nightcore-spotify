@@ -1,14 +1,19 @@
-import { createNcPromptMultiplierMessage, createNcSetMultiplierMessage, NcMessageTypes } from '../shared/messenger';
+import { createNcPromptMultiplierMessage, NcMessageTypes } from '../shared/messenger';
 import { NcContentScriptService } from './content-script.service';
+
+// tslint:disable max-classes-per-file
 
 describe('NcContentScriptService', () => {
 
   let service: NcContentScriptService;
+  let mockBrowser: MockBrowser;
   let mockWindow: MockWindow;
 
   beforeEach(() => {
+    mockBrowser = new MockBrowser();
     mockWindow = new MockWindow();
     service = new NcContentScriptService(
+      mockBrowser as any as typeof browser,
       mockWindow as any as Window,
     );
   });
@@ -19,14 +24,14 @@ describe('NcContentScriptService', () => {
 
   it('should init and listen to messages', () => {
     service.init();
-    expect(mockWindow.browser.runtime.onMessage.addListener).toHaveBeenCalled();
+    expect(mockBrowser.runtime.onMessage.addListener).toHaveBeenCalled();
   });
 
   it('should destroy and cleanup', () => {
     service.init();
-    expect(mockWindow.browser.runtime.onMessage.addListener).toHaveBeenCalled();
+    expect(mockBrowser.runtime.onMessage.addListener).toHaveBeenCalled();
     service.destroy();
-    expect(mockWindow.browser.runtime.onMessage.removeListener).toHaveBeenCalled();
+    expect(mockBrowser.runtime.onMessage.removeListener).toHaveBeenCalled();
   });
 
   describe('Messaging', () => {
@@ -34,7 +39,7 @@ describe('NcContentScriptService', () => {
     let handler: (...params: any[]) => any;
 
     beforeEach(() => {
-      mockWindow.browser.runtime.onMessage.addListener.mockImplementation(h => handler = h);
+      mockBrowser.runtime.onMessage.addListener.mockImplementation(h => handler = h);
       service.init();
     });
 
@@ -85,19 +90,16 @@ describe('NcContentScriptService', () => {
 
 });
 
-class MockWindow {
-
-  browser = {
-    runtime: {
-      onMessage: {
-        addListener: jest.fn(),
-        removeListener: jest.fn(),
-      },
+class MockBrowser {
+  runtime = {
+    onMessage: {
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
     },
   };
+}
 
+class MockWindow {
   prompt = jest.fn();
-
   postMessage = jest.fn();
-
 }

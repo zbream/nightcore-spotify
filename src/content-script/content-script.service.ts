@@ -9,12 +9,13 @@ export class NcContentScriptService {
   private _subscriptions = new Subscription();
 
   constructor(
+    private _browser: typeof browser,
     private _window: Window,
   ) {}
 
   init() {
     this._subscriptions.add(
-      fromWebExtEvent(this._window.browser.runtime.onMessage).pipe(
+      fromWebExtEvent(this._browser.runtime.onMessage).pipe(
         map(([message]) => message),
         filter(isNcPromptMultiplierMessage),
       ).subscribe(() => void this._onPromptMultiplierMessage()),

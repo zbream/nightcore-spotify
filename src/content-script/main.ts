@@ -1,6 +1,6 @@
 import { NcContentScriptService } from './content-script.service';
 
-new NcContentScriptService(window).init();
+new NcContentScriptService(browser, window).init();
 
 // https://stackoverflow.com/a/9517879
 const injectUrl = browser.runtime.getURL('page-script/page-script.js');

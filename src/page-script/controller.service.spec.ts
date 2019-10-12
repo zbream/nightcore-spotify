@@ -1,5 +1,7 @@
 import { NcControllerService } from './controller.service';
 
+// tslint:disable max-classes-per-file
+
 describe('NcControllerService', () => {
 
   let service: NcControllerService;
@@ -103,7 +105,6 @@ class MockDocument {
   createElement = this.mockCreateElement;
 
   mockCreatedElement?: { tag: string };
-
   mockCreateElement(tag: string) {
     this.mockCreatedElement = { tag };
     return this.mockCreatedElement;
