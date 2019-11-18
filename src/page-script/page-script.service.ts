@@ -1,12 +1,7 @@
-import { fromEvent, Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
-
 import { isNcSetMultiplierMessage, NcSetMultiplierMessage } from '../shared/messenger';
 import { NcControllerService } from './controller.service';
 
 export class NcPageScriptService {
-
-  private _subscriptions = new Subscription();
 
   constructor(
     private _window: Window,
@@ -14,16 +9,11 @@ export class NcPageScriptService {
   ) {}
 
   init() {
-    this._subscriptions.add(
-      fromEvent<MessageEvent>(this._window, 'message').pipe(
-        map(event => event.data),
-        filter(isNcSetMultiplierMessage),
-      ).subscribe(message => void this._onSetMultiplierMessage(message)),
-    );
-  }
-
-  destroy() {
-    this._subscriptions.unsubscribe();
+    this._window.addEventListener('message', ({ data: message }) => {
+      if (isNcSetMultiplierMessage(message)) {
+        this._onSetMultiplierMessage(message);
+      }
+    });
   }
 
   private _onSetMultiplierMessage(message: NcSetMultiplierMessage) {

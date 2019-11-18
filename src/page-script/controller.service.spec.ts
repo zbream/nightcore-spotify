@@ -24,10 +24,6 @@ describe('NcControllerService', () => {
     expect(mockDocument.createElement).not.toBe(mockDocument.mockCreateElement);
   });
 
-  it('should destroy and cleanup', () => {
-    service.destroy();
-  });
-
   it('should set audio player with no-op multiplier', () => {
     service.init();
 

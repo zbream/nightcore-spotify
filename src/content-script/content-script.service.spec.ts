@@ -27,13 +27,6 @@ describe('NcContentScriptService', () => {
     expect(mockBrowser.runtime.onMessage.addListener).toHaveBeenCalled();
   });
 
-  it('should destroy and cleanup', () => {
-    service.init();
-    expect(mockBrowser.runtime.onMessage.addListener).toHaveBeenCalled();
-    service.destroy();
-    expect(mockBrowser.runtime.onMessage.removeListener).toHaveBeenCalled();
-  });
-
   describe('Messaging', () => {
 
     let handler: (...params: any[]) => any;

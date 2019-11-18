@@ -19,8 +19,6 @@ export class NcControllerService {
     };
   }
 
-  destroy() {}
-
   setMultiplier(multiplier: number) {
     this._multiplier = multiplier;
     this._updatePlayer();

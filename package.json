@@ -9,17 +9,15 @@
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production",
     "lint": "tslint -p .",
+    "test": "jest",
     "clean": "rimraf dist dist-artifacts",
-    "ci": "run-s clean lint build web-ext:build",
+    "ci": "run-s clean lint test build web-ext:build",
     "web-ext:build": "web-ext build --source-dir dist --artifacts-dir dist-artifacts",
-    "web-ext:run": "web-ext run --source-dir dist --url https://open.spotify.com --browser-console",
-    "test": "jest"
+    "web-ext:run": "web-ext run --source-dir dist --url https://open.spotify.com --browser-console"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "rxjs": "^6.5.3"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/chrome": "0.0.91",
     "@types/firefox-webext-browser": "^70.0.1",

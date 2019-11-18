@@ -24,13 +24,6 @@ describe('NcBackgroundService', () => {
     expect(mockBrowser.pageAction.onClicked.addListener).toHaveBeenCalled();
   });
 
-  it('should destroy and cleanup', () => {
-    service.init();
-    expect(mockBrowser.pageAction.onClicked.addListener).toHaveBeenCalled();
-    service.destroy();
-    expect(mockBrowser.pageAction.onClicked.removeListener).toHaveBeenCalled();
-  });
-
   it('should send PromptMultiplier message to tabs on PageAction', () => {
     let handler: any;
     mockBrowser.pageAction.onClicked.addListener.mockImplementation(h => handler = h);

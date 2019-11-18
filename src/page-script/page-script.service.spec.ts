@@ -28,13 +28,6 @@ describe('NcPageScriptService', () => {
     expect(mockWindow.addEventListener).toHaveBeenCalled();
   });
 
-  it('should destroy', () => {
-    service.init();
-    expect(mockWindow.addEventListener).toHaveBeenCalled();
-    service.destroy();
-    expect(mockWindow.removeEventListener).toHaveBeenCalled();
-  });
-
   describe('Messaging', () => {
 
     let handler: (...params: any[]) => any;

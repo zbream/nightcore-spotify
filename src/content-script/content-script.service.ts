@@ -1,12 +1,6 @@
-import { Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
-
 import { createNcSetMultiplierMessage, isNcPromptMultiplierMessage, NcMessage } from '../shared/messenger';
-import { fromWebExtEvent } from '../shared/web-ext-event';
 
 export class NcContentScriptService {
-
-  private _subscriptions = new Subscription();
 
   constructor(
     private _browser: typeof browser,
@@ -14,16 +8,11 @@ export class NcContentScriptService {
   ) {}
 
   init() {
-    this._subscriptions.add(
-      fromWebExtEvent(this._browser.runtime.onMessage).pipe(
-        map(([message]) => message),
-        filter(isNcPromptMultiplierMessage),
-      ).subscribe(() => void this._onPromptMultiplierMessage()),
-    );
-  }
-
-  destroy() {
-    this._subscriptions.unsubscribe();
+    this._browser.runtime.onMessage.addListener(message => {
+      if (isNcPromptMultiplierMessage(message)) {
+        this._onPromptMultiplierMessage();
+      }
+    });
   }
 
   private _onPromptMultiplierMessage() {
@@ -36,10 +25,10 @@ export class NcContentScriptService {
       return;
     }
     const message = createNcSetMultiplierMessage(multiplier);
-    this._notifyPageScript(message);
+    this._messagePageScript(message);
   }
 
-  private _notifyPageScript(message: NcMessage) {
+  private _messagePageScript(message: NcMessage) {
     this._window.postMessage(message, '*');
   }
 
